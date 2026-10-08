@@ -1,0 +1,341 @@
+{
+  "entities": {
+    "PortfolioSettings": {
+      "title": "PortfolioSettings",
+      "description": "Public portfolio configuration and executive profile data for Moyna Miah and MADA AL-GHUROUB GENERAL CONTRACTING COMPANY.",
+      "type": "object",
+      "properties": {
+        "nameEn": {
+          "type": "string",
+          "description": "Executive full name in English",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "nameAr": {
+          "type": "string",
+          "description": "Executive full name in Arabic",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "roleEn": {
+          "type": "string",
+          "description": "Executive designation in English",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "roleAr": {
+          "type": "string",
+          "description": "Executive designation in Arabic",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "companyEn": {
+          "type": "string",
+          "description": "Company name in English",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "companyAr": {
+          "type": "string",
+          "description": "Company name in Arabic",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "email": {
+          "type": "string",
+          "description": "Official contact email displayed on portfolio",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "phone": {
+          "type": "string",
+          "description": "Direct telephone number displayed on portfolio",
+          "minLength": 5,
+          "maxLength": 60
+        },
+        "regionEn": {
+          "type": "string",
+          "description": "Operating corridors in English",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "regionAr": {
+          "type": "string",
+          "description": "Operating corridors in Arabic",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "bioEn": {
+          "type": "string",
+          "description": "Executive summary in English",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "bioAr": {
+          "type": "string",
+          "description": "Executive summary in Arabic",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "aramcoVendorId": {
+          "type": "string",
+          "description": "Vendor registration identifier",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "iktvaScore": {
+          "type": "string",
+          "description": "IKTVA local content score",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "portraitDataUrl": {
+          "type": "string",
+          "description": "Compressed data URL or image URL for executive portrait",
+          "maxLength": 450000
+        },
+        "logoDataUrl": {
+          "type": "string",
+          "description": "Compressed data URL or image URL for company logo",
+          "maxLength": 350000
+        },
+        "updatedByEmail": {
+          "type": "string",
+          "description": "Admin email who last updated the settings",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of the update"
+        }
+      },
+      "required": [
+        "nameEn",
+        "nameAr",
+        "roleEn",
+        "roleAr",
+        "companyEn",
+        "companyAr",
+        "email",
+        "phone",
+        "regionEn",
+        "regionAr",
+        "bioEn",
+        "bioAr",
+        "aramcoVendorId",
+        "iktvaScore",
+        "portraitDataUrl",
+        "logoDataUrl",
+        "updatedByEmail",
+        "updatedAt"
+      ]
+    },
+    "TenderInquiry": {
+      "title": "TenderInquiry",
+      "description": "Client project inquiry and manpower requisition submitted via the Direct Tender RFQ Portal.",
+      "type": "object",
+      "properties": {
+        "referenceId": {
+          "type": "string",
+          "description": "Official tender reference code (e.g., RFQ-MM-2026-123456)",
+          "minLength": 5,
+          "maxLength": 40
+        },
+        "timestampDisplay": {
+          "type": "string",
+          "description": "Human-readable AST timestamp",
+          "minLength": 5,
+          "maxLength": 40
+        },
+        "organization": {
+          "type": "string",
+          "description": "Contracting company or government entity name",
+          "minLength": 1,
+          "maxLength": 180
+        },
+        "contactName": {
+          "type": "string",
+          "description": "Authorized procurement or project director name",
+          "minLength": 1,
+          "maxLength": 140
+        },
+        "email": {
+          "type": "string",
+          "description": "Client official email address",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "phone": {
+          "type": "string",
+          "description": "Client direct phone or mobile number",
+          "minLength": 5,
+          "maxLength": 60
+        },
+        "region": {
+          "type": "string",
+          "description": "Project industrial corridor or Saudi city",
+          "minLength": 1,
+          "maxLength": 140
+        },
+        "contractPackageType": {
+          "type": "string",
+          "description": "Contract model type",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "estimatedBudgetSAR": {
+          "type": "string",
+          "description": "Estimated contract value bracket in SAR",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "mobilizationTimeline": {
+          "type": "string",
+          "description": "Target mobilization window",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "selectedScopesSummary": {
+          "type": "string",
+          "description": "Selected engineering and manpower scopes joined as a summary string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "attachedTradesSummary": {
+          "type": "string",
+          "description": "Summary of attached workforce trades and headcounts",
+          "maxLength": 1500
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional technical notes or BOQ reference",
+          "maxLength": 2000
+        },
+        "status": {
+          "type": "string",
+          "description": "Review status of the inquiry",
+          "enum": ["new", "reviewed", "contacted"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when inquiry was created"
+        }
+      },
+      "required": [
+        "referenceId",
+        "timestampDisplay",
+        "organization",
+        "contactName",
+        "email",
+        "phone",
+        "region",
+        "contractPackageType",
+        "estimatedBudgetSAR",
+        "mobilizationTimeline",
+        "selectedScopesSummary",
+        "attachedTradesSummary",
+        "notes",
+        "status",
+        "createdAt"
+      ]
+    },
+    "CompanyProfileConfig": {
+      "title": "CompanyProfileConfig",
+      "description": "Official downloadable Company Profile configuration, custom overview text, CR registration details, external PDF link, or uploaded PDF/brochure file for MADA AL-GHUROUB GENERAL CONTRACTING COMPANY.",
+      "type": "object",
+      "properties": {
+        "crNumber": {
+          "type": "string",
+          "description": "Saudi Commercial Registration (CR) number",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "headquartersEn": {
+          "type": "string",
+          "description": "Official headquarters address in English",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "headquartersAr": {
+          "type": "string",
+          "description": "Official headquarters address in Arabic",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "companyOverviewEn": {
+          "type": "string",
+          "description": "Detailed Company Profile overview and mission statement in English",
+          "minLength": 1,
+          "maxLength": 3000
+        },
+        "companyOverviewAr": {
+          "type": "string",
+          "description": "Detailed Company Profile overview and mission statement in Arabic",
+          "minLength": 1,
+          "maxLength": 3000
+        },
+        "externalPdfUrl": {
+          "type": "string",
+          "description": "Optional direct link or Google Drive link to a PDF Company Profile",
+          "maxLength": 600
+        },
+        "uploadedFileName": {
+          "type": "string",
+          "description": "File name of the uploaded Company Profile PDF or brochure",
+          "maxLength": 200
+        },
+        "uploadedFileDataUrl": {
+          "type": "string",
+          "description": "Base64 Data URL of the uploaded Company Profile PDF or image brochure",
+          "maxLength": 700000
+        },
+        "updatedByEmail": {
+          "type": "string",
+          "description": "Admin email who last updated the company profile",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of the update"
+        }
+      },
+      "required": [
+        "crNumber",
+        "headquartersEn",
+        "headquartersAr",
+        "companyOverviewEn",
+        "companyOverviewAr",
+        "externalPdfUrl",
+        "uploadedFileName",
+        "uploadedFileDataUrl",
+        "updatedByEmail",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/portfolio_config/{configId}": {
+      "schema": {
+        "$ref": "#/entities/PortfolioSettings"
+      },
+      "description": "Singleton public portfolio configuration document (configId == 'main') readable by visitors and writable exclusively by the verified admin (sabbirhossenksa.2.6@gmail.com)."
+    },
+    "/company_profile_doc/{docId}": {
+      "schema": {
+        "$ref": "#/entities/CompanyProfileConfig"
+      },
+      "description": "Singleton public Company Profile configuration and downloadable brochure document (docId == 'main') readable by visitors and writable exclusively by the verified admin (sabbirhossenksa.2.6@gmail.com)."
+    },
+    "/tender_inquiries/{inquiryId}": {
+      "schema": {
+        "$ref": "#/entities/TenderInquiry"
+      },
+      "description": "Client project and manpower RFQ inquiries submitted via the website. Public visitors can create new inquiries; only the verified admin (sabbirhossenksa.2.6@gmail.com) can read, list, update status, or delete inquiries."
+    }
+  }
+}

@@ -1,0 +1,202 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Global Safety Net: Default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // 2. Hardened Primitives
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Strict Bootstrapped Admin Verification (Requires verified Google token matching owner email)
+    function isAdmin() {
+      return isSignedIn()
+        && request.auth.token.email_verified == true
+        && request.auth.token.email == 'sabbirhossenksa.2.6@gmail.com';
+    }
+
+    // 3. Validation Blueprint for PortfolioSettings
+    function isValidPortfolioSettings(data) {
+      return data.keys().hasAll([
+          'nameEn', 'nameAr', 'roleEn', 'roleAr',
+          'companyEn', 'companyAr', 'email', 'phone',
+          'regionEn', 'regionAr', 'bioEn', 'bioAr',
+          'aramcoVendorId', 'iktvaScore',
+          'portraitDataUrl', 'logoDataUrl',
+          'updatedByEmail', 'updatedAt'
+        ])
+        && data.keys().hasOnly([
+          'nameEn', 'nameAr', 'roleEn', 'roleAr',
+          'companyEn', 'companyAr', 'email', 'phone',
+          'regionEn', 'regionAr', 'bioEn', 'bioAr',
+          'aramcoVendorId', 'iktvaScore',
+          'portraitDataUrl', 'logoDataUrl',
+          'updatedByEmail', 'updatedAt'
+        ])
+        && data.nameEn is string && data.nameEn.size() >= 1 && data.nameEn.size() <= 120
+        && data.nameAr is string && data.nameAr.size() >= 1 && data.nameAr.size() <= 160
+        && data.roleEn is string && data.roleEn.size() >= 1 && data.roleEn.size() <= 160
+        && data.roleAr is string && data.roleAr.size() >= 1 && data.roleAr.size() <= 200
+        && data.companyEn is string && data.companyEn.size() >= 1 && data.companyEn.size() <= 200
+        && data.companyAr is string && data.companyAr.size() >= 1 && data.companyAr.size() <= 240
+        && data.email is string && data.email.size() >= 3 && data.email.size() <= 160
+        && data.phone is string && data.phone.size() >= 5 && data.phone.size() <= 60
+        && data.regionEn is string && data.regionEn.size() >= 1 && data.regionEn.size() <= 240
+        && data.regionAr is string && data.regionAr.size() >= 1 && data.regionAr.size() <= 240
+        && data.bioEn is string && data.bioEn.size() >= 1 && data.bioEn.size() <= 1200
+        && data.bioAr is string && data.bioAr.size() >= 1 && data.bioAr.size() <= 1200
+        && data.aramcoVendorId is string && data.aramcoVendorId.size() >= 1 && data.aramcoVendorId.size() <= 80
+        && data.iktvaScore is string && data.iktvaScore.size() >= 1 && data.iktvaScore.size() <= 60
+        && data.portraitDataUrl is string && data.portraitDataUrl.size() <= 450000
+        && data.logoDataUrl is string && data.logoDataUrl.size() <= 350000
+        && data.updatedByEmail is string && data.updatedByEmail == request.auth.token.email && data.updatedByEmail.size() <= 160
+        && data.updatedAt is timestamp && data.updatedAt == request.time;
+    }
+
+    // 3b. Validation Blueprint for CompanyProfileConfig
+    function isValidCompanyProfileConfig(data) {
+      return data.keys().hasAll([
+          'crNumber', 'headquartersEn', 'headquartersAr',
+          'companyOverviewEn', 'companyOverviewAr',
+          'externalPdfUrl', 'uploadedFileName', 'uploadedFileDataUrl',
+          'updatedByEmail', 'updatedAt'
+        ])
+        && data.keys().hasOnly([
+          'crNumber', 'headquartersEn', 'headquartersAr',
+          'companyOverviewEn', 'companyOverviewAr',
+          'externalPdfUrl', 'uploadedFileName', 'uploadedFileDataUrl',
+          'updatedByEmail', 'updatedAt'
+        ])
+        && data.crNumber is string && data.crNumber.size() >= 1 && data.crNumber.size() <= 120
+        && data.headquartersEn is string && data.headquartersEn.size() >= 1 && data.headquartersEn.size() <= 300
+        && data.headquartersAr is string && data.headquartersAr.size() >= 1 && data.headquartersAr.size() <= 300
+        && data.companyOverviewEn is string && data.companyOverviewEn.size() >= 1 && data.companyOverviewEn.size() <= 3000
+        && data.companyOverviewAr is string && data.companyOverviewAr.size() >= 1 && data.companyOverviewAr.size() <= 3000
+        && data.externalPdfUrl is string && data.externalPdfUrl.size() <= 600
+        && data.uploadedFileName is string && data.uploadedFileName.size() <= 200
+        && data.uploadedFileDataUrl is string && data.uploadedFileDataUrl.size() <= 700000
+        && data.updatedByEmail is string && data.updatedByEmail == request.auth.token.email && data.updatedByEmail.size() <= 160
+        && data.updatedAt is timestamp && data.updatedAt == request.time;
+    }
+
+    // 4. Validation Blueprint for TenderInquiry
+    function isValidTenderInquiry(data) {
+      return data.keys().hasAll([
+          'referenceId', 'timestampDisplay', 'organization', 'contactName',
+          'email', 'phone', 'region', 'contractPackageType',
+          'estimatedBudgetSAR', 'mobilizationTimeline',
+          'selectedScopesSummary', 'attachedTradesSummary',
+          'notes', 'status', 'createdAt'
+        ])
+        && data.keys().hasOnly([
+          'referenceId', 'timestampDisplay', 'organization', 'contactName',
+          'email', 'phone', 'region', 'contractPackageType',
+          'estimatedBudgetSAR', 'mobilizationTimeline',
+          'selectedScopesSummary', 'attachedTradesSummary',
+          'notes', 'status', 'createdAt'
+        ])
+        && data.referenceId is string && data.referenceId.size() >= 5 && data.referenceId.size() <= 40
+        && data.timestampDisplay is string && data.timestampDisplay.size() >= 5 && data.timestampDisplay.size() <= 40
+        && data.organization is string && data.organization.size() >= 1 && data.organization.size() <= 180
+        && data.contactName is string && data.contactName.size() >= 1 && data.contactName.size() <= 140
+        && data.email is string && data.email.size() >= 3 && data.email.size() <= 160
+        && data.phone is string && data.phone.size() >= 5 && data.phone.size() <= 60
+        && data.region is string && data.region.size() >= 1 && data.region.size() <= 140
+        && data.contractPackageType is string && data.contractPackageType.size() >= 1 && data.contractPackageType.size() <= 120
+        && data.estimatedBudgetSAR is string && data.estimatedBudgetSAR.size() >= 1 && data.estimatedBudgetSAR.size() <= 80
+        && data.mobilizationTimeline is string && data.mobilizationTimeline.size() >= 1 && data.mobilizationTimeline.size() <= 80
+        && data.selectedScopesSummary is string && data.selectedScopesSummary.size() >= 1 && data.selectedScopesSummary.size() <= 1200
+        && data.attachedTradesSummary is string && data.attachedTradesSummary.size() <= 1500
+        && data.notes is string && data.notes.size() <= 2000
+        && data.status is string && (data.status == 'new' || data.status == 'reviewed' || data.status == 'contacted')
+        && data.createdAt is timestamp;
+    }
+
+    // Public Portfolio Configuration Document (Singleton 'main')
+    match /portfolio_config/{configId} {
+      // Public visitors can read the singleton 'main' portfolio configuration document
+      allow get: if isValidId(configId) && configId == 'main';
+
+      // Only the verified admin (sabbirhossenksa.2.6@gmail.com) can create or update the 'main' config
+      allow create: if isAdmin()
+        && isValidId(configId)
+        && configId == 'main'
+        && isValidPortfolioSettings(incoming());
+
+      allow update: if isAdmin()
+        && isValidId(configId)
+        && configId == 'main'
+        && isValidPortfolioSettings(incoming())
+        && incoming().diff(existing()).affectedKeys().hasOnly([
+          'nameEn', 'nameAr', 'roleEn', 'roleAr',
+          'companyEn', 'companyAr', 'email', 'phone',
+          'regionEn', 'regionAr', 'bioEn', 'bioAr',
+          'aramcoVendorId', 'iktvaScore',
+          'portraitDataUrl', 'logoDataUrl',
+          'updatedByEmail', 'updatedAt'
+        ]);
+    }
+
+    // Public Company Profile Document & Downloadable Brochure (Singleton 'main')
+    match /company_profile_doc/{docId} {
+      // Public visitors can read the singleton 'main' company profile document to download the brochure
+      allow get: if isValidId(docId) && docId == 'main';
+
+      // Only the verified admin (sabbirhossenksa.2.6@gmail.com) can create or update the 'main' company profile
+      allow create: if isAdmin()
+        && isValidId(docId)
+        && docId == 'main'
+        && isValidCompanyProfileConfig(incoming());
+
+      allow update: if isAdmin()
+        && isValidId(docId)
+        && docId == 'main'
+        && isValidCompanyProfileConfig(incoming())
+        && incoming().diff(existing()).affectedKeys().hasOnly([
+          'crNumber', 'headquartersEn', 'headquartersAr',
+          'companyOverviewEn', 'companyOverviewAr',
+          'externalPdfUrl', 'uploadedFileName', 'uploadedFileDataUrl',
+          'updatedByEmail', 'updatedAt'
+        ]);
+    }
+
+    // Client Tender & Manpower RFQ Inquiries Collection
+    match /tender_inquiries/{inquiryId} {
+      // Public B2B clients can submit a new inquiry with strict schema & timestamp enforcement
+      allow create: if isValidId(inquiryId)
+        && isValidTenderInquiry(incoming())
+        && incoming().status == 'new'
+        && incoming().createdAt == request.time;
+
+      // Strictly isolated PII: Only the verified admin can read or list client inquiries
+      allow get: if isAdmin() && isValidId(inquiryId);
+      allow list: if isAdmin();
+
+      // Only the verified admin can update the inquiry status (e.g., 'new' -> 'reviewed' / 'contacted')
+      allow update: if isAdmin()
+        && isValidId(inquiryId)
+        && isValidTenderInquiry(incoming())
+        && incoming().createdAt == existing().createdAt
+        && incoming().referenceId == existing().referenceId
+        && incoming().diff(existing()).affectedKeys().hasOnly(['status']);
+
+      // Only the verified admin can delete an inquiry
+      allow delete: if isAdmin() && isValidId(inquiryId);
+    }
+  }
+}
