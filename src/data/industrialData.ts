@@ -1,21 +1,24 @@
-import heroImg from '../assets/images/saudi_manpower_hero_mobilization_1791449271812.jpg';
-import jubailImg from '../assets/images/saudi_manpower_welders_piping_1791449284885.jpg';
-import neomImg from '../assets/images/saudi_manpower_civil_construction_1791449295322.jpg';
-import redSeaImg from '../assets/images/saudi_manpower_rigging_electrical_1791449305561.jpg';
-import workforceImg from '../assets/images/saudi_manpower_hse_briefing_1791449316348.jpg';
-import campBusesImg from '../assets/images/real_clean_white_buses_camp_1791473164593.jpg';
-import weldingTestImg from '../assets/images/saudi_manpower_welding_test_center_1791467909956.jpg';
-import scaffoldingCrewImg from '../assets/images/saudi_manpower_scaffolding_crew_1791467921365.jpg';
-import electricalInstImg from '../assets/images/saudi_manpower_electrical_instrumentation_1791467931765.jpg';
-import campDiningWelfareImg from '../assets/images/saudi_manpower_camp_dining_welfare_1791467958504.jpg';
-import civilRebarFormworkImg from '../assets/images/saudi_civil_rebar_formwork_crew_1791468345238.jpg';
-import petroShutdownFittersImg from '../assets/images/saudi_petro_shutdown_pipefitters_1791468357358.jpg';
-import craneHeavyRiggingImg from '../assets/images/saudi_crane_heavy_rigging_team_1791468367550.jpg';
-import ajeerWprPermitDeskImg from '../assets/images/saudi_ajeer_wpr_permit_desk_1791468378611.jpg';
-import campCateringClinicImg from '../assets/images/saudi_camp_catering_clinic_ops_1791468390538.jpg';
-import busConvoyHighwayImg from '../assets/images/real_clean_buses_road_dispatch_1791473176102.jpg';
+import heroImg from '../assets/images/hero_manpower_rearview_1795286169333.webp';
+import jubailImg from '../assets/images/jubail_welders_rearview_1795286172129.webp';
+import neomImg from '../assets/images/neom_civil_strict_rearview_1795286259742.webp';
+import redSeaImg from '../assets/images/redsea_rigging_rearview_1795286169636.webp';
+import workforceImg from '../assets/images/hse_briefing_strict_rearview_1795286259136.webp';
+import campBusesImg from '../assets/images/camp_buses_rearview_1795286171822.webp';
+import weldingTestImg from '../assets/images/welding_test_rearview_1795286169375.webp';
+import scaffoldingCrewImg from '../assets/images/scaffolding_crew_rearview_1795286171668.webp';
+import electricalInstImg from '../assets/images/electrical_crew_rearview_1795286189147.webp';
+import campDiningWelfareImg from '../assets/images/camp_welfare_rearview_1795286168082.webp';
+import civilRebarFormworkImg from '../assets/images/civil_rebar_rearview_1795286180925.webp';
+import petroShutdownFittersImg from '../assets/images/petro_fitters_rearview_1795286170011.webp';
+import craneHeavyRiggingImg from '../assets/images/crane_riggers_rearview_1795286171668.webp';
+import ajeerWprPermitDeskImg from '../assets/images/ajeer_loto_strict_rearview_1795286259176.webp';
+import campCateringClinicImg from '../assets/images/camp_dining_rearview_1795286169722.webp';
+import busConvoyHighwayImg from '../assets/images/bus_road_rearview_1795286169683.webp';
 import moynaPortraitImg from '../assets/images/moyna_miah_portrait_1791440206465.jpg';
 import companyLogoImg from '../assets/images/mada_al_ghuroub_logo_1791447189585.jpg';
+import eqCranesLiftingImg from '../assets/images/rental_cranes_faceless_1795285418560.webp';
+import eqEarthmovingCivilImg from '../assets/images/rental_earthmoving_faceless_1795285312029.webp';
+import eqPowerSupportImg from '../assets/images/rental_power_faceless_1795285308293.webp';
 
 export const ASSETS = {
   hero: heroImg,
@@ -36,6 +39,9 @@ export const ASSETS = {
   busConvoyHighway: busConvoyHighwayImg,
   moynaPortrait: moynaPortraitImg,
   companyLogo: companyLogoImg,
+  eqCranesLifting: eqCranesLiftingImg,
+  eqEarthmovingCivil: eqEarthmovingCivilImg,
+  eqPowerSupport: eqPowerSupportImg,
 };
 
 export const EXECUTIVE_PROFILE = {
@@ -59,8 +65,8 @@ export const EXECUTIVE_PROFILE = {
     en: 'Kingdom of Saudi Arabia · Dhahran · Jubail · Yanbu · Riyadh · NEOM',
     ar: 'المملكة العربية السعودية · الظهران · الجبيل · ينبع · الرياض · نيوم',
   },
-  email: 'sabbirhossenksa.2.6@gmail.com',
-  phone: '+966 50 884 9200',
+  email: 'moyna@madaalghuroub.com',
+  phone: '+966 506425705',
   experienceYears: '12+ Years',
   bio: {
     en: 'Business Development Manager at MADA AL-GHUROUB GENERAL CONTRACTING COMPANY, leading Saudi industrial manpower supply, Ajeer-compliant skilled & general workforce mobilization, strategic B2B client partnerships, and turnkey contracting operations across Dhahran, Jubail, Yanbu, Riyadh, and NEOM.',
@@ -134,6 +140,27 @@ export interface FieldGalleryItem {
   title: { en: string; ar: string };
   caption: { en: string; ar: string };
   metricBadge: string;
+}
+
+export interface EquipmentRentalItem {
+  id: string;
+  code: string;
+  category: 'lifting' | 'earthmoving' | 'power';
+  accentColor: '#1E4FD8' | '#00B8D4' | '#F39C12';
+  image: string;
+  title: { en: string; ar: string };
+  subtitle: { en: string; ar: string };
+  location: { en: string; ar: string };
+  description: { en: string; ar: string };
+  fleetSize: string;
+  dailyRateRangeSAR: string;
+  monthlyRateRangeSAR: string;
+  certificationBadge: string;
+  specs: {
+    label: { en: string; ar: string };
+    value: { en: string; ar: string };
+  }[];
+  equipmentModels: { en: string[]; ar: string[] };
 }
 
 export interface ProjectDossier {
@@ -760,3 +787,166 @@ export const WORKFORCE_ROSTER: WorkforceTradeRow[] = [
     readinessState: 'scheduled',
   },
 ];
+
+export const EQUIPMENT_RENTAL_FLEET: EquipmentRentalItem[] = [
+  {
+    id: 'eq-lifting-01',
+    code: 'EQP-LFT-500T',
+    category: 'lifting',
+    accentColor: '#1E4FD8',
+    image: ASSETS.eqCranesLifting,
+    title: {
+      en: '01. Heavy Mobile Cranes, Manlifts & Rigging Equipment Rental',
+      ar: '01. تأجير الرافعات الهيدروليكية المتحركة والرافعات الشوكية ومعدات الرفع الثقيل',
+    },
+    subtitle: {
+      en: 'Hydraulic Cranes (25T–500T) · Telescopic Boom Lifts · Heavy Forklifts & Telehandlers',
+      ar: 'رافعات هيدروليكية (25 إلى 500 طن) · مان ليفت تلسكوبي · رافعات شوكية وتلي هاندلر',
+    },
+    location: {
+      en: 'Jubail · Dhahran · Dammam · Yanbu · NEOM',
+      ar: 'الجبيل · الظهران · الدمام · ينبع · نيوم',
+    },
+    description: {
+      en: 'We provide daily, weekly, and monthly heavy lifting equipment rental across Saudi Arabia. Every crane and lifting unit is supplied with valid Aramco third-party inspection stickers (TUV/SGS), load-moment indicators (PWAS), and certified operators.',
+      ar: 'نوفر خدمات تأجير معدات الرفع الثقيل بعقود يومية أو أسبوعية أو شهرية في كافة مناطق المملكة، شاملة فحص الطرف الثالث المعتمد لدى أرامكو (TUV) ومشغلين مرخصين.',
+    },
+    fleetSize: '145+ Units Ready',
+    dailyRateRangeSAR: 'SAR 1,450 – 8,500 / Day',
+    monthlyRateRangeSAR: 'SAR 32,000 – 185,000 / Mo',
+    certificationBadge: 'Aramco Sticker & TUV Certified',
+    specs: [
+      {
+        label: { en: 'Capacity Range', ar: 'نطاق الحمولة' },
+        value: { en: '25 Ton to 500 Ton All-Terrain', ar: 'من 25 طن حتى 500 طن لجميع التضاريس' },
+      },
+      {
+        label: { en: 'Operator & Safety', ar: 'المشغل والسلامة' },
+        value: { en: 'Aramco Certified Operator + PWAS System', ar: 'مشغل معتمد من أرامكو + نظام PWAS' },
+      },
+      {
+        label: { en: 'Rental Terms', ar: 'نظام التأجير' },
+        value: { en: 'Daily · Weekly · Monthly (With Fuel/Maint.)', ar: 'يومي · أسبوعي · شهري (مع الصيانة)' },
+      },
+    ],
+    equipmentModels: {
+      en: [
+        'Liebherr & Tadano All-Terrain Mobile Hydraulic Cranes (50T, 100T, 250T, 500T)',
+        'JLG & Genie Telescopic Boom Lifts (Manlifts 20m–42m) & Scissor Lifts',
+        'Caterpillar & Hyster Heavy-Duty Diesel Forklifts (5T–16T) & JCB Telehandlers',
+      ],
+      ar: [
+        'رافعات ليبهير وتادانو الهيدروليكية المتحركة (50 طن، 100 طن، 250 طن، 500 طن)',
+        'رافعات الأفراد التلسكوبية (مان ليفت 20–42 متر) والرافعات المقصية',
+        'رافعات شوكية ديزل للخدمة الشاقة (5–16 طن) ومعدات المناولة التلسكوبية (تلي هاندلر)',
+      ],
+    },
+  },
+  {
+    id: 'eq-earthmoving-02',
+    code: 'EQP-CIV-CAT',
+    category: 'earthmoving',
+    accentColor: '#00B8D4',
+    image: ASSETS.eqEarthmovingCivil,
+    title: {
+      en: '02. Earthmoving, Excavation & Civil Infrastructure Machinery Rental',
+      ar: '02. تأجير معدات الحفر والتسوية ومعدات الإنشاءات المدنية والطرق',
+    },
+    subtitle: {
+      en: 'CAT Hydraulic Excavators · Wheel Loaders · D8/D9 Bulldozers · Compactors & Dump Trucks',
+      ar: 'حفارات هيدروليكية كاتربيلر · شيولات · بلدوزرات · رصاصات وشاحنات قلاب',
+    },
+    location: {
+      en: 'Riyadh · NEOM · Tabuk · Red Sea · Eastern Province',
+      ar: 'الرياض · نيوم · تبوك · البحر الأحمر · المنطقة الشرقية',
+    },
+    description: {
+      en: 'Full fleet of modern earthmoving and civil construction machinery available for immediate site rental. Backed by 24/7 mobile workshop mechanics, genuine spare parts support, and experienced heavy equipment drivers.',
+      ar: 'أسطول متكامل من معدات الحفر والردم وتمهيد الطرق متاح للإيجار الفوري للمشاريع الكبرى، مدعوم بورش صيانة متنقلة على مدار الساعة وسائقين ذوي خبرة عالية.',
+    },
+    fleetSize: '210+ Units Ready',
+    dailyRateRangeSAR: 'SAR 950 – 3,800 / Day',
+    monthlyRateRangeSAR: 'SAR 21,000 – 78,000 / Mo',
+    certificationBadge: 'GPS Tracked & 24/7 Field Service',
+    specs: [
+      {
+        label: { en: 'Primary Fleet Brands', ar: 'العلامات التجارية' },
+        value: { en: 'Caterpillar (CAT), Komatsu, JCB & Volvo', ar: 'كاتربيلر (CAT)، كوماتسو، JCB وفولفو' },
+      },
+      {
+        label: { en: 'Maintenance SLA', ar: 'ضمان الصيانة' },
+        value: { en: '24/7 On-Site Mechanic & Replacement Unit', ar: 'فني صيانة بالموقع 24/7 ومعدة بديلة' },
+      },
+      {
+        label: { en: 'Mobilization Speed', ar: 'سرعة التوريد للموقع' },
+        value: { en: 'Lowbed Trailer Dispatch Within 48 Hours', ar: 'نقل عبر سطحات لوبد خلال 48 ساعة' },
+      },
+    ],
+    equipmentModels: {
+      en: [
+        'CAT 320 / 336 / 349 Hydraulic Excavators (With Bucket & Rock Breaker Jackhammer)',
+        'CAT 950 / 966 / 980 Wheel Loaders (Shovels), D8R Bulldozers & Motor Graders',
+        'JCB 3CX Backhoe Loaders, 10-Ton Vibratory Rollers, Bobcat Skid-Steers & Dump Trucks',
+      ],
+      ar: [
+        'حفارات كاتربيلر الهيدروليكية 320 / 336 / 349 (مع دلو الحفر أو دقاق الصخور)',
+        'شيولات كاتربيلر 950 / 966 / 980 وبلدوزرات D8R وجريدرات تسوية الطرق',
+        'باكهو لودر JCB 3CX ورصاصات اهتزازية 10 طن وبوبكات وشاحنات قلاب ثقيلة',
+      ],
+    },
+  },
+  {
+    id: 'eq-power-03',
+    code: 'EQP-PWR-GEN',
+    category: 'power',
+    accentColor: '#F39C12',
+    image: ASSETS.eqPowerSupport,
+    title: {
+      en: '03. Diesel Generators, Air Compressors, Welding Rigs & Site Support Rental',
+      ar: '03. تأجير المولدات الكهربائية وضواغط الهواء وماكينات اللحام ومعدات المساندة',
+    },
+    subtitle: {
+      en: 'Soundproof Generators (50–1250 kVA) · Air Compressors · Miller Welding Rigs & Tower Lights',
+      ar: 'مولدات ديزل كاتمة للصوت · كمبروسر هواء · ماكينات لحام ميلر وأبراج إنارة',
+    },
+    location: {
+      en: 'Dammam · Jubail · Yanbu · Ras Tanura · All KSA',
+      ar: 'الدمام · الجبيل · ينبع · رأس تنورة · كافة مناطق المملكة',
+    },
+    description: {
+      en: 'Turnkey rental of refinery-grade power generators, high-CFM air compressors, diesel welding machines, and site transport vehicles. Equipped with spark arrestors, chalwyn valves, and drip trays for oil & gas shutdown compliance.',
+      ar: 'تأجير فوري للمولدات الكهربائية الكاتمة للصوت وضواغط الهواء وماكينات اللحام وأبراج الإنارة، مجهزة بمانعات الشرر وصمامات الأمان للعمل داخل المصافي ومعامل النفط والغاز.',
+    },
+    fleetSize: '380+ Units Ready',
+    dailyRateRangeSAR: 'SAR 350 – 2,900 / Day',
+    monthlyRateRangeSAR: 'SAR 6,500 – 58,000 / Mo',
+    certificationBadge: 'Refinery Spark-Arrestor Equipped',
+    specs: [
+      {
+        label: { en: 'Power & Air Output', ar: 'القدرة التشغيلية' },
+        value: { en: '50 kVA – 1,250 kVA | 185 – 900 CFM Air', ar: '50 إلى 1,250 ك.ف.أ | 185 إلى 900 قدم مكعب' },
+      },
+      {
+        label: { en: 'Plant Safety Kit', ar: 'تجهيزات سلامة المصافي' },
+        value: { en: 'Spark Arrestor · Chalwyn Valve · Bunded Tank', ar: 'مانع شرر · صمام إغلاق آمن · خزان مزدوج' },
+      },
+      {
+        label: { en: 'Transport & Tankers', ar: 'النقل والصهاريج' },
+        value: { en: 'Flatbed Boom Trucks, Water/Diesel Tankers & Buses', ar: 'شاحنات بوم ترك وصهاريج مياه وديزل وحافلات' },
+      },
+    ],
+    equipmentModels: {
+      en: [
+        'Cummins, Perkins & CAT Soundproof Diesel Generators (50 kVA to 1,250 kVA)',
+        'Atlas Copco & Doosan Towable Air Compressors (185 CFM – 900 CFM) & Sandblasting Pots',
+        'Miller Big Blue 400X / 500X Diesel Welding Machines, LED Tower Lights & Boom Trucks',
+      ],
+      ar: [
+        'مولدات كهرباء ديزل كاتمة للصوت كمنز وبيركنز وكاتربيلر (50 إلى 1,250 ك.ف.أ)',
+        'ضواغط هواء أطلس كوبكو ودوسان (185 إلى 900 CFM) ومعدات السفع الرملي',
+        'ماكينات لحام ديزل ميلر (Miller 400X/500X) وأبراج إنارة LED وشاحنات بوم ترك',
+      ],
+    },
+  },
+];
+

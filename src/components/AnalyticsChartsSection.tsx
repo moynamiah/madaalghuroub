@@ -347,19 +347,19 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
         </div>
 
         {/* Top High-Contrast Executive Telemetry KPI Cards with Mini Sparklines */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-6 sm:mb-8">
-          <div className="bg-white rounded-[8px] border border-[#8A94A6]/25 p-4 sm:p-5 border-t-4 border-t-[#1E4FD8] shadow-xs flex flex-col justify-between">
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-[11px] sm:text-xs text-[#44464e] font-semibold">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-6 sm:mb-8">
+          <div className="bg-white rounded-[8px] border border-[#8A94A6]/25 p-4 sm:p-5 border-t-4 border-t-[#1E4FD8] shadow-xs flex flex-col justify-between min-w-0 overflow-hidden">
+            <div className="flex items-center justify-between gap-2 min-w-0">
+              <span className="text-[11px] sm:text-xs text-[#44464e] font-semibold leading-snug">
                 {lang === 'en' ? 'Active Mobilized Workforce' : 'إجمالي القوى العاملة النشطة'}
               </span>
               <TrendingUp className="w-4 h-4 text-[#1E4FD8] shrink-0" />
             </div>
-            <div className="my-2 flex items-baseline justify-between gap-2">
+            <div className="my-2 flex items-baseline justify-between gap-2 min-w-0">
               <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0A1F44] tabular-nums">
                 18,420
               </div>
-              <svg viewBox="0 0 70 24" className="w-16 h-6 overflow-visible">
+              <svg viewBox="0 0 70 24" className="w-16 h-6 shrink-0">
                 <polyline
                   fill="none"
                   stroke="#1E4FD8"
@@ -367,26 +367,26 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
                   strokeLinecap="round"
                   points="2,20 15,16 28,12 42,8 55,5 68,2"
                 />
-                <circle cx="68" cy="2" r="3" fill="#00B8D4" />
+                <circle cx="66" cy="3" r="3" fill="#00B8D4" />
               </svg>
             </div>
-            <div className="text-[11px] font-mono text-[#007E94] font-semibold tabular-nums">
+            <div className="text-[11px] font-mono text-[#007E94] font-semibold tabular-nums leading-snug break-words">
               {lang === 'en' ? '92.3% Utilization · +188% Since 2021' : 'نسبة التشغيل 92.3% · نمو +188%'}
             </div>
           </div>
 
-          <div className="bg-white rounded-[8px] border border-[#8A94A6]/25 p-4 sm:p-5 border-t-4 border-t-[#00B8D4] shadow-xs flex flex-col justify-between">
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-[11px] sm:text-xs text-[#44464e] font-semibold">
+          <div className="bg-white rounded-[8px] border border-[#8A94A6]/25 p-4 sm:p-5 border-t-4 border-t-[#00B8D4] shadow-xs flex flex-col justify-between min-w-0 overflow-hidden">
+            <div className="flex items-center justify-between gap-2 min-w-0">
+              <span className="text-[11px] sm:text-xs text-[#44464e] font-semibold leading-snug">
                 {lang === 'en' ? 'Cumulative LTI-Free Hours' : 'ساعات العمل الآمنة بدون إصابات'}
               </span>
               <ShieldCheck className="w-4 h-4 text-[#00B8D4] shrink-0" />
             </div>
-            <div className="my-2 flex items-baseline justify-between gap-2">
+            <div className="my-2 flex items-baseline justify-between gap-2 min-w-0">
               <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0A1F44] tabular-nums">
                 42.6M
               </div>
-              <svg viewBox="0 0 70 24" className="w-16 h-6 overflow-visible">
+              <svg viewBox="0 0 70 24" className="w-16 h-6 shrink-0">
                 <polyline
                   fill="none"
                   stroke="#00B8D4"
@@ -394,50 +394,50 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
                   strokeLinecap="round"
                   points="2,21 16,18 30,13 44,9 56,5 68,2"
                 />
-                <circle cx="68" cy="2" r="3" fill="#0A1F44" />
+                <circle cx="66" cy="3" r="3" fill="#0A1F44" />
               </svg>
             </div>
-            <div className="text-[11px] font-mono text-[#007E94] font-semibold tabular-nums">
+            <div className="text-[11px] font-mono text-[#007E94] font-semibold tabular-nums leading-snug break-words">
               {lang === 'en' ? '0.00 LTIFR · ISO 45001 Audited' : 'معدل إصابات 0.00 · معتمد ISO 45001'}
             </div>
           </div>
 
-          <div className="bg-white rounded-[8px] border border-[#8A94A6]/25 p-4 sm:p-5 border-t-4 border-t-[#F39C12] shadow-xs flex flex-col justify-between">
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-[11px] sm:text-xs text-[#44464e] font-semibold">
+          <div className="bg-white rounded-[8px] border border-[#8A94A6]/25 p-4 sm:p-5 border-t-4 border-t-[#F39C12] shadow-xs flex flex-col justify-between min-w-0 overflow-hidden">
+            <div className="flex items-center justify-between gap-2 min-w-0">
+              <span className="text-[11px] sm:text-xs text-[#44464e] font-semibold leading-snug">
                 {lang === 'en' ? 'Aramco IKTVA & Compliance' : 'مؤشر اكتفاء وتوثيق أجير'}
               </span>
               <Award className="w-4 h-4 text-[#F39C12] shrink-0" />
             </div>
-            <div className="my-2 flex items-baseline justify-between gap-2">
+            <div className="my-2 flex flex-wrap items-baseline justify-between gap-2 min-w-0">
               <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0A1F44] tabular-nums">
                 74.2%
               </div>
-              <span className="text-[11px] font-mono font-bold text-[#0A1F44] bg-white px-2 py-0.5 rounded-[3px] border border-[#8A94A6]/30">
-                100% AJEER
+              <span className="text-[11px] font-mono font-bold text-[#0A1F44] bg-white px-2 py-0.5 rounded-[3px] border border-[#8A94A6]/30 shrink-0">
+                {lang === 'en' ? '100% AJEER' : 'أجير 100%'}
               </span>
             </div>
-            <div className="text-[11px] font-mono text-[#1E4FD8] font-semibold tabular-nums">
+            <div className="text-[11px] font-mono text-[#1E4FD8] font-semibold tabular-nums leading-snug break-words">
               {lang === 'en' ? 'Platinum Nitaqat · 100% WPS Sync' : 'النطاق البلاتيني · التزام كامل بالأجور'}
             </div>
           </div>
 
-          <div className="bg-white rounded-[8px] border border-[#8A94A6]/25 p-4 sm:p-5 border-t-4 border-t-[#0A1F44] shadow-xs flex flex-col justify-between">
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-[11px] sm:text-xs text-[#44464e] font-semibold">
+          <div className="bg-white rounded-[8px] border border-[#8A94A6]/25 p-4 sm:p-5 border-t-4 border-t-[#0A1F44] shadow-xs flex flex-col justify-between min-w-0 overflow-hidden">
+            <div className="flex items-center justify-between gap-2 min-w-0">
+              <span className="text-[11px] sm:text-xs text-[#44464e] font-semibold leading-snug">
                 {lang === 'en' ? '72h Standby Reserve Pool' : 'الاحتياطي الجاهز للتعبئة (72 ساعة)'}
               </span>
               <Layers className="w-4 h-4 text-[#0A1F44] shrink-0" />
             </div>
-            <div className="my-2 flex items-baseline justify-between gap-2">
+            <div className="my-2 flex flex-wrap items-baseline justify-between gap-2 min-w-0">
               <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#0A1F44] tabular-nums">
                 +1,530
               </div>
-              <span className="text-[11px] font-mono font-bold text-[#007E94] bg-[#eff3ff] px-2 py-0.5 rounded-[3px]">
-                READY NOW
+              <span className="text-[11px] font-mono font-bold text-[#007E94] bg-[#eff3ff] px-2 py-0.5 rounded-[3px] shrink-0">
+                {lang === 'en' ? 'READY NOW' : 'جاهز الآن'}
               </span>
             </div>
-            <div className="text-[11px] font-mono text-[#44464e] tabular-nums">
+            <div className="text-[11px] font-mono text-[#44464e] tabular-nums leading-snug break-words">
               {lang === 'en' ? '6,200 Camp Beds · 210 AC Buses' : '6,200 سرير سكن · 210 حافلات مكيفة'}
             </div>
           </div>
@@ -446,7 +446,7 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
         {/* ROW 1: MODEL 01 (Dual-Curve Bezier Spline Chart) + MODEL 02 (6-Axis Radar Compliance Chart) */}
         <div className="grid grid-cols-12 gap-5 sm:gap-6 mb-6">
           {/* MODEL 01: Smooth Cubic-Bezier Area & Dual-Curve Chart (7 Columns) */}
-          <div className="col-span-12 lg:col-span-7 bg-white rounded-[8px] border border-[#8A94A6]/25 p-5 sm:p-6 shadow-xs flex flex-col justify-between">
+          <div className="col-span-12 lg:col-span-7 bg-white rounded-[8px] border border-[#8A94A6]/25 p-4 sm:p-6 shadow-xs flex flex-col justify-between min-w-0 overflow-hidden">
             <div>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#8A94A6]/20">
                 <div>
@@ -725,7 +725,7 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
           </div>
 
           {/* MODEL 02: 6-Axis Spider / Radar Governance Benchmark Chart (5 Columns) */}
-          <div className="col-span-12 lg:col-span-5 bg-white rounded-[8px] border border-[#8A94A6]/25 p-5 sm:p-6 shadow-xs flex flex-col justify-between">
+          <div className="col-span-12 lg:col-span-5 bg-white rounded-[8px] border border-[#8A94A6]/25 p-4 sm:p-6 shadow-xs flex flex-col justify-between min-w-0 overflow-hidden">
             <div>
               <div className="pb-4 border-b border-[#8A94A6]/20 flex items-start justify-between gap-2">
                 <div>
@@ -742,7 +742,7 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
                   </h3>
                 </div>
                 <span className="text-[10px] font-mono font-bold text-[#007E94] bg-[#eff3ff] px-2 py-1 rounded-[3px] border border-[#1E4FD8]/20 shrink-0">
-                  97.7% INDEX
+                  {lang === 'en' ? '97.7% INDEX' : 'مؤشر 97.7%'}
                 </span>
               </div>
 
@@ -853,7 +853,7 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
                         key={m.key}
                         type="button"
                         onClick={() => setActiveRadarIdx(idx)}
-                        className={`w-full min-w-0 text-left px-2.5 py-1.5 rounded-[4px] border transition-colors cursor-pointer flex items-center justify-between gap-2 ${
+                        className={`w-full min-w-0 text-start px-2.5 py-1.5 rounded-[4px] border transition-colors cursor-pointer flex items-center justify-between gap-2 ${
                           isSelected
                             ? 'bg-[#eff3ff] border-[#1E4FD8]'
                             : 'bg-white border-[#8A94A6]/20 hover:border-[#0A1F44]/40'
@@ -887,7 +887,9 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
                   {lang === 'en' ? 'KSA Sector Avg' : 'متوسط القطاع'}
                 </span>
               </div>
-              <span className="text-[#007E94] font-semibold">Aramco Audited</span>
+              <span className="text-[#007E94] font-semibold">
+                {lang === 'en' ? 'Aramco Audited' : 'تدقيق أرامكو'}
+              </span>
             </div>
           </div>
         </div>
@@ -895,7 +897,7 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
         {/* ROW 2: MODEL 03 (2026 Monthly Stacked Column Velocity Chart) + MODEL 04 (Concentric Regional Gauge) */}
         <div className="grid grid-cols-12 gap-5 sm:gap-6 mb-6">
           {/* MODEL 03: 2026 Monthly Stacked Column Mobilization Velocity Chart (7 Columns) */}
-          <div className="col-span-12 lg:col-span-7 bg-white rounded-[8px] border border-[#8A94A6]/25 p-5 sm:p-6 shadow-xs flex flex-col justify-between">
+          <div className="col-span-12 lg:col-span-7 bg-white rounded-[8px] border border-[#8A94A6]/25 p-4 sm:p-6 shadow-xs flex flex-col justify-between min-w-0 overflow-hidden">
             <div>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-[#8A94A6]/20">
                 <div>
@@ -1008,16 +1010,20 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
               </span>
               <div className="flex flex-wrap items-center gap-3 text-[11px]">
                 <span>
-                  <strong className="text-[#1E4FD8]">{activeMonthData.civil}</strong> Civil
+                  <strong className="text-[#1E4FD8]">{activeMonthData.civil}</strong>{' '}
+                  {lang === 'en' ? 'Civil' : 'مدني'}
                 </span>
                 <span>
-                  <strong className="text-[#007E94]">{activeMonthData.oilGas}</strong> 6G/Piping
+                  <strong className="text-[#007E94]">{activeMonthData.oilGas}</strong>{' '}
+                  {lang === 'en' ? '6G/Piping' : 'لحام 6G'}
                 </span>
                 <span>
-                  <strong className="text-[#0A1F44]">{activeMonthData.rigging}</strong> Rigging
+                  <strong className="text-[#0A1F44]">{activeMonthData.rigging}</strong>{' '}
+                  {lang === 'en' ? 'Rigging' : 'رفع ثقيل'}
                 </span>
                 <span>
-                  <strong className="text-[#A36605]">{activeMonthData.hse}</strong> HSE/WPR
+                  <strong className="text-[#A36605]">{activeMonthData.hse}</strong>{' '}
+                  {lang === 'en' ? 'HSE/WPR' : 'السلامة'}
                 </span>
               </div>
             </div>
@@ -1106,7 +1112,7 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
                       18,420
                     </span>
                     <span className="text-[9px] font-mono font-bold text-[#007E94] mt-1">
-                      92.3% ACTIVE
+                      {lang === 'en' ? '92.3% ACTIVE' : '92.3% نشط'}
                     </span>
                   </div>
                 </div>
@@ -1124,7 +1130,7 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
                             regionFilter === region.id ? 'all' : (region.id as RegionFilter)
                           )
                         }
-                        className={`w-full min-w-0 text-left p-2.5 rounded-[5px] border transition-colors cursor-pointer ${
+                        className={`w-full min-w-0 text-start p-2.5 rounded-[5px] border transition-colors cursor-pointer ${
                           isSelected
                             ? 'bg-[#eff3ff] border-[#1E4FD8]'
                             : 'bg-white border-[#8A94A6]/20 hover:border-[#0A1F44]/40'
@@ -1142,7 +1148,7 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
                             {region.workforceShare}%
                           </span>
                         </div>
-                        <div className="mt-1 flex flex-wrap items-center justify-between gap-x-2 gap-y-0.5 text-[11px] font-mono text-[#44464e] tabular-nums pl-4">
+                        <div className="mt-1 flex flex-wrap items-center justify-between gap-x-2 gap-y-0.5 text-[11px] font-mono text-[#44464e] tabular-nums ps-4">
                           <span>
                             {region.activePersonnel.toLocaleString()}{' '}
                             {lang === 'en' ? 'Staff' : 'كادر'}
@@ -1165,7 +1171,9 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
                   ? 'Outer Ring: Workforce Share · Inner Ring: 92.3% Active'
                   : 'الحلقة الخارجية: التوزيع · الداخلية: 92.3% نسبة التشغيل'}
               </span>
-              <span className="text-[#0A1F44] font-bold shrink-0">KSA-Wide</span>
+              <span className="text-[#0A1F44] font-bold shrink-0">
+                {lang === 'en' ? 'KSA-Wide' : 'كافة مناطق المملكة'}
+              </span>
             </div>
           </div>
         </div>
@@ -1173,7 +1181,7 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
         {/* ROW 3: MODEL 05 (Trade Capacity & SLA Matrix) + MODEL 06 (Interactive Project Workforce & Cost Simulator) */}
         <div className="grid grid-cols-12 gap-5 sm:gap-6">
           {/* MODEL 05: Trade Division Utilization & SLA Velocity Bars (7 Columns) */}
-          <div className="col-span-12 lg:col-span-7 bg-white rounded-[8px] border border-[#8A94A6]/25 p-5 sm:p-6 shadow-xs">
+          <div className="col-span-12 lg:col-span-7 bg-white rounded-[8px] border border-[#8A94A6]/25 p-4 sm:p-6 shadow-xs min-w-0 overflow-hidden">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-[#8A94A6]/20 mb-4">
               <div>
                 <span className="text-[11px] font-mono font-semibold text-[#1E4FD8] block">
@@ -1227,15 +1235,15 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
                     {/* Segmented Dual-Color Capacity Bar */}
                     <div className="w-full h-3.5 bg-white rounded-[3px] border border-[#8A94A6]/35 overflow-hidden p-0.5 flex">
                       <div
-                        className="h-full rounded-l-[2px] transition-all duration-300"
+                        className="h-full rounded-s-[2px] transition-all duration-300"
                         style={{
                           width: `${utilizationPct}%`,
                           backgroundColor: trade.color,
                         }}
                       />
                       <div
-                        className="h-full bg-[#00B8D4]/25 flex-1 rounded-r-[2px]"
-                        title="Standby Reserve"
+                        className="h-full bg-[#00B8D4]/25 flex-1 rounded-e-[2px]"
+                        title={lang === 'en' ? 'Standby Reserve' : 'احتياطي جاهز'}
                       />
                     </div>
 
@@ -1264,7 +1272,7 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
           </div>
 
           {/* MODEL 06: Interactive Turnkey Mobilization & Cost Forecasting Simulator (5 Columns) */}
-          <div className="col-span-12 lg:col-span-5 bg-white text-[#0A1F44] rounded-[8px] border border-[#8A94A6]/25 p-5 sm:p-6 shadow-xs flex flex-col justify-between">
+          <div className="col-span-12 lg:col-span-5 bg-white text-[#0A1F44] rounded-[8px] border border-[#8A94A6]/25 p-4 sm:p-6 shadow-xs flex flex-col justify-between min-w-0 overflow-hidden">
             <div>
               <div className="pb-4 border-b border-[#8A94A6]/20 flex items-center justify-between gap-2">
                 <div>
@@ -1295,7 +1303,7 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
                         key={t.code}
                         type="button"
                         onClick={() => setSimTradeIdx(idx)}
-                        className={`px-2.5 py-2 rounded-[4px] text-left font-display text-xs font-semibold border transition-colors cursor-pointer truncate ${
+                        className={`px-2.5 py-2 rounded-[4px] text-start font-display text-xs font-semibold border transition-colors cursor-pointer truncate ${
                           simTradeIdx === idx
                             ? 'bg-[#1E4FD8] text-white border-[#1E4FD8]'
                             : 'bg-white text-[#0A1F44] border-[#8A94A6]/30 hover:border-[#1E4FD8]'
@@ -1327,9 +1335,9 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
                     className="w-full accent-[#1E4FD8] cursor-pointer"
                   />
                   <div className="flex justify-between text-[10px] font-mono text-[#8A94A6]">
-                    <span>50 Crew</span>
-                    <span>750 Crew</span>
-                    <span>1,500 Crew</span>
+                    <span>{lang === 'en' ? '50 Crew' : '50 عامل'}</span>
+                    <span>{lang === 'en' ? '750 Crew' : '750 عامل'}</span>
+                    <span>{lang === 'en' ? '1,500 Crew' : '1,500 عامل'}</span>
                   </div>
                 </div>
 
@@ -1353,9 +1361,9 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = mem
                     className="w-full accent-[#F39C12] cursor-pointer"
                   />
                   <div className="flex justify-between text-[10px] font-mono text-[#8A94A6]">
-                    <span>1 Mo (Shutdown)</span>
-                    <span>12 Months</span>
-                    <span>24 Months</span>
+                    <span>{lang === 'en' ? '1 Mo (Shutdown)' : 'شهر واحد'}</span>
+                    <span>{lang === 'en' ? '12 Months' : '12 شهراً'}</span>
+                    <span>{lang === 'en' ? '24 Months' : '24 شهراً'}</span>
                   </div>
                 </div>
 

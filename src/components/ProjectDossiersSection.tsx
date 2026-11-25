@@ -54,7 +54,7 @@ export const ProjectDossiersSection: React.FC<ProjectDossiersSectionProps> = mem
             {/* Interactive Filter Controls */}
             <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 w-full lg:w-auto max-w-full">
               <div className="relative w-full sm:w-auto">
-                <Search className="w-4 h-4 text-[#8A94A6] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Search className="w-4 h-4 text-[#8A94A6] absolute start-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="text"
                   value={projectSearch}
@@ -65,7 +65,7 @@ export const ProjectDossiersSection: React.FC<ProjectDossiersSectionProps> = mem
                       : 'ابحث برقم العقد أو المدينة...'
                   }
                   aria-label={lang === 'en' ? 'Search project dossiers' : 'البحث في ملفات المشاريع'}
-                  className="min-h-[44px] w-full sm:w-60 pl-9 pr-3 py-2 text-xs bg-white border border-[#8A94A6]/35 rounded-[4px] text-[#0A1F44] placeholder:text-[#8A94A6] focus:outline-none focus:border-[#1E4FD8] transition-colors"
+                  className="min-h-[44px] w-full sm:w-60 ps-9 pe-3 py-2 text-xs bg-white border border-[#8A94A6]/35 rounded-[4px] text-[#0A1F44] placeholder:text-[#8A94A6] focus:outline-none focus:border-[#1E4FD8] transition-colors"
                 />
               </div>
 

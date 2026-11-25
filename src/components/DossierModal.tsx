@@ -66,7 +66,7 @@ export const DossierModal: React.FC<DossierModalProps> = memo(({
           <button
             type="button"
             onClick={onClose}
-            className="min-h-[44px] min-w-[44px] flex items-center justify-center text-[#44464e] hover:text-[#0A1F44] hover:bg-[#F4F6F9] rounded-[4px] transition-colors cursor-pointer shrink-0 -mr-1"
+            className="min-h-[44px] min-w-[44px] flex items-center justify-center text-[#44464e] hover:text-[#0A1F44] hover:bg-[#F4F6F9] rounded-[4px] transition-colors cursor-pointer shrink-0 -me-1"
             aria-label={lang === 'en' ? 'Close technical dossier' : 'إغلاق الملف الفني'}
           >
             <X className="w-5 h-5" />
@@ -155,7 +155,7 @@ export const DossierModal: React.FC<DossierModalProps> = memo(({
                       <CheckCircle2 className="w-4 h-4 text-[#00B8D4] shrink-0" />
                       <span>{item.parameter[lang]}</span>
                     </div>
-                    <div className="sm:col-span-7 font-mono text-xs text-[#44464e] tabular-nums pl-6 sm:pl-0">
+                    <div className="sm:col-span-7 font-mono text-xs text-[#44464e] tabular-nums ps-6 sm:ps-0">
                       {item.specification[lang]}
                     </div>
                   </div>
@@ -164,7 +164,7 @@ export const DossierModal: React.FC<DossierModalProps> = memo(({
             </div>
 
             {/* Attributable Executive Testimonial */}
-            <div className="p-4 sm:p-5 bg-[#F4F6F9] border-l-4 border-[#1E4FD8] rounded-r-[4px]">
+            <div className="p-4 sm:p-5 bg-[#F4F6F9] border-s-4 border-[#1E4FD8] rounded-e-[4px]">
               <p className="text-xs sm:text-sm text-[#121c2a] italic leading-relaxed mb-3">
                 "{dossier.testimonial.quote[lang]}"
               </p>
