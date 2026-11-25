@@ -6,6 +6,7 @@ on:
       - security/websocket-driver-20261125
     paths:
       - package.json
+      - .github/workflows/patch-websocket-lock.yml
 
 permissions:
   contents: write
@@ -28,7 +29,7 @@ jobs:
       - name: Update lockfile for the pinned dependency
         run: |
           node --input-type=commonjs -e "const p=require('./package.json'); if (p.overrides['websocket-driver'] !== '^0.8.0') process.exit(1)"
-          npm install --package-lock-only --ignore-scripts --no-fund
+          npm install --no-fund --ignore-scripts
 
       - name: Check resolved patched websocket-driver
         run: |
