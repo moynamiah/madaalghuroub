@@ -1,0 +1,57 @@
+name: CI Quality & Build Verification
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.12.0'
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: TypeScript typecheck
+        run: npm run lint
+
+      - name: Run automated unit tests
+        run: npm test
+
+      - name: Security vulnerability audit (high/critical)
+        run: npm audit --audit-level=high
+
+      - name: Build production bundle (Hostinger root base path)
+        env:
+          VITE_BASE_PATH: /
+        run: npm run build
+
+      - name: Verify required static deployment artifacts
+        run: |
+          test -f dist/index.html
+          test -f dist/.htaccess
+          test -f dist/robots.txt
+          test -d dist/assets
+          if grep -q "/madaalghuroub/" dist/index.html; then
+            echo "ERROR: Unexpected /madaalghuroub/ subpath detected in root Hostinger build."
+            exit 1
+          fi

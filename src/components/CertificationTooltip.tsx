@@ -43,10 +43,10 @@ export const CertificationTooltip: React.FC<CertificationTooltipProps> = memo(({
 
   const alignClasses =
     align === 'start'
-      ? 'sm:left-0 sm:translate-x-0'
+      ? 'sm:start-0 sm:translate-x-0'
       : align === 'end'
-      ? 'sm:right-0 sm:left-auto sm:translate-x-0'
-      : 'sm:left-1/2 sm:-translate-x-1/2';
+      ? 'sm:end-0 sm:start-auto sm:translate-x-0'
+      : 'sm:start-1/2 sm:-translate-x-1/2 rtl:sm:translate-x-1/2';
 
   return (
     <span
@@ -100,7 +100,7 @@ export const CertificationTooltip: React.FC<CertificationTooltipProps> = memo(({
                 : 'border-t-[#00B8D4]'
             }
             shadow-[0_20px_48px_-8px_rgba(10,31,68,0.65)]
-            text-left
+            text-start
             transition-opacity duration-150 opacity-100
           `}
         >

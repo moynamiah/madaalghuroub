@@ -1,8 +1,29 @@
+# Dependencies & build outputs
 node_modules/
-build/
 dist/
+build/
 coverage/
-.DS_Store
+.cache/
+.vite/
+
+# AI Studio temporary artifacts & uploaded debug media
+.aistudio/
+.aistudio/artifacts/
+**/.tempmediaStorage/
+public/assets/aistudio/
+
+# Logs, OS files & temporary archives
 *.log
-.env*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
+*.zip
+*.tmp
+*.bak
+
+# Local environment secrets (never commit credentials)
+.env
+.env.*
 !.env.example

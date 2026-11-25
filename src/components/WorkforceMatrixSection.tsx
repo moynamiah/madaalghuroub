@@ -194,7 +194,7 @@ export const WorkforceMatrixSection: React.FC<WorkforceMatrixSectionProps> = mem
               <div className="aspect-[16/10] sm:aspect-[4/3] w-full">
                 <ResilientImage
                   src={ASSETS.workforce}
-                  alt="Saudi HSE safety officers conducting morning toolbox briefing with manpower crew"
+                  alt="Saudi manpower crew gathered for morning HSE toolbox safety briefing seen from behind"
                   fallbackTitle="Technical Workforce Command"
                   className="w-full h-full object-cover"
                 />
@@ -399,7 +399,7 @@ export const WorkforceMatrixSection: React.FC<WorkforceMatrixSectionProps> = mem
 
             {/* DESKTOP & TABLET TABULAR MATRIX (`hidden md:block`) */}
             <div className="hidden md:block overflow-x-auto">
-              <table className="w-full text-left border-collapse">
+              <table className="w-full text-start border-collapse">
                 <thead>
                   <tr className="border-b border-[#8A94A6]/25 bg-white text-[11px] font-display font-bold text-[#0A1F44] uppercase tracking-wider">
                     <th className="py-3.5 px-4 w-10 text-center">

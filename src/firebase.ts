@@ -1,14 +1,26 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-import { getFirestore, doc, getDocFromServer } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { initializeFirestore, doc, getDocFromServer, setLogLevel } from 'firebase/firestore';
 import firebaseConfig from '../firebase-applet-config.json';
 
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
+// Suppress noisy internal WebChannel transport warnings in restricted iframe/proxy environments
+setLogLevel('silent');
 
-export const ADMIN_EMAIL = 'sabbirhossenksa.2.6@gmail.com';
+const app = initializeApp(firebaseConfig);
+const firestoreDatabaseId = (firebaseConfig as { firestoreDatabaseId?: string }).firestoreDatabaseId;
+// This project uses a named Firestore database. Never silently switch to (default):
+// doing so could hide existing portfolio data or route RFQs to the wrong database.
+if (!firestoreDatabaseId || firestoreDatabaseId === '(default)') {
+  throw new Error('Missing required named Firestore database configuration.');
+}
+export const db = initializeFirestore(
+  app,
+  {
+    experimentalAutoDetectLongPolling: true,
+  },
+  firestoreDatabaseId
+);
+export const auth = getAuth(app);
 
 export enum OperationType {
   CREATE = 'create',

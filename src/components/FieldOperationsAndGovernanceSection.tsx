@@ -6,10 +6,11 @@ import { CertificationTooltip } from './CertificationTooltip';
 
 interface FieldOperationsAndGovernanceSectionProps {
   lang: Language;
+  iktvaScore?: string;
 }
 
 export const FieldOperationsAndGovernanceSection: React.FC<FieldOperationsAndGovernanceSectionProps> =
-  memo(({ lang }) => {
+  memo(({ lang, iktvaScore = '74.2% Certified' }) => {
     return (
       <>
         {/* SECTION 03B: ON-SITE MANPOWER, TRADE TESTING & CAMP LOGISTICS VISUAL GALLERY */}
@@ -88,8 +89,8 @@ export const FieldOperationsAndGovernanceSection: React.FC<FieldOperationsAndGov
               <div className="col-span-12 lg:col-span-5 space-y-3 sm:space-y-4">
                 <p className="text-xs font-mono font-semibold text-[#1E4FD8]">
                   {lang === 'en'
-                    ? '04. Regulatory & HSE Governance'
-                    : '04. الحوكمة التنظيمية والسلامة المهنية'}
+                    ? '05. Regulatory & HSE Governance'
+                    : '05. الحوكمة التنظيمية والسلامة المهنية'}
                 </p>
                 <h2 className="font-display text-[24px] leading-[32px] sm:text-[36px] sm:leading-[44px] font-bold text-[#0A1F44]">
                   {lang === 'en'
@@ -149,7 +150,7 @@ export const FieldOperationsAndGovernanceSection: React.FC<FieldOperationsAndGov
                           ? 'IKTVA (In-Kingdom Total Value Add)'
                           : 'برنامج القيمة المضافة الإجمالية في المملكة (اكتفاء)'
                       }
-                      code="IKTVA 74.2%"
+                      code={`IKTVA ${iktvaScore}`}
                       accentColor="#1E4FD8"
                       position="top"
                       align="center"
@@ -169,7 +170,7 @@ export const FieldOperationsAndGovernanceSection: React.FC<FieldOperationsAndGov
                     </span>
                   </div>
                   <div className="font-display text-base font-bold text-[#0A1F44] mb-1">
-                    {lang === 'en' ? '74.2% IKTVA Score' : '74.2% برنامج اكتفاء'}
+                    {lang === 'en' ? `IKTVA ${iktvaScore}` : `برنامج اكتفاء ${iktvaScore}`}
                   </div>
                   <p className="text-xs text-[#44464e] leading-relaxed">
                     {lang === 'en'

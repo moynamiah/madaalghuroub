@@ -25,7 +25,6 @@ interface HeroSectionProps {
   activePhone: string;
   aramcoVendorId: string;
   iktvaScore: string;
-  onTriggerPortraitUpload: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = memo(
@@ -43,7 +42,6 @@ export const HeroSection: React.FC<HeroSectionProps> = memo(
     activePhone,
     aramcoVendorId,
     iktvaScore,
-    onTriggerPortraitUpload,
   }) => {
     return (
       <section className="relative bg-[#0A1F44] text-white overflow-hidden border-b border-[#8A94A6]/25">
@@ -68,10 +66,7 @@ export const HeroSection: React.FC<HeroSectionProps> = memo(
               <div className="bg-white text-[#121c2a] border border-white/25 border-t-4 border-t-[#00B8D4] rounded-[8px] overflow-hidden shadow-[0_24px_54px_-10px_rgba(10,31,68,0.55)]">
                 <div className="p-4 sm:p-6 flex flex-row lg:flex-col items-center gap-4 sm:gap-5 bg-gradient-to-b from-[#F4F6F9] to-white border-b border-[#8A94A6]/25">
                   {/* Framed Passport-Style Executive Portrait */}
-                  <div
-                    onDoubleClick={onTriggerPortraitUpload}
-                    className="relative w-28 h-36 sm:w-36 sm:h-44 lg:w-42 lg:h-52 bg-white p-1.5 border-2 border-[#0A1F44] ring-2 ring-[#00B8D4]/40 rounded-[6px] shadow-md shrink-0 overflow-hidden select-none"
-                  >
+                  <div className="relative w-28 h-36 sm:w-36 sm:h-44 lg:w-42 lg:h-52 bg-white p-1.5 border-2 border-[#0A1F44] ring-2 ring-[#00B8D4]/40 rounded-[6px] shadow-md shrink-0 overflow-hidden select-none">
                     <ResilientImage
                       src={activePortraitSrc}
                       alt="Moyna Miah — Business Development Manager"
@@ -83,7 +78,7 @@ export const HeroSection: React.FC<HeroSectionProps> = memo(
                   </div>
 
                   {/* Executive Name, Title & Company with Company Logo */}
-                  <div className="flex-1 min-w-0 text-left lg:text-center space-y-1.5 sm:space-y-2">
+                  <div className="flex-1 min-w-0 text-start lg:text-center space-y-1.5 sm:space-y-2">
                     <div className="text-[11px] sm:text-xs font-mono font-semibold text-[#007E94]">
                       {lang === 'en' ? 'Verified Executive Profile' : 'بطاقة القيادة التنفيذية الموثقة'}
                     </div>
@@ -100,9 +95,12 @@ export const HeroSection: React.FC<HeroSectionProps> = memo(
                         <img
                           src={activeLogoSrc}
                           alt="MADA AL-GHUROUB Logo"
+                          loading="eager"
+                          decoding="sync"
+                          fetchPriority="high"
                           className="w-9 h-9 sm:w-10 sm:h-10 rounded-[4px] object-contain bg-white border border-[#0A1F44]/15 p-0.5 shrink-0"
                         />
-                        <p className="text-[11px] sm:text-xs font-display font-bold text-[#0A1F44] leading-snug text-left break-words">
+                        <p className="text-[11px] sm:text-xs font-display font-bold text-[#0A1F44] leading-snug text-start break-words">
                           {activeCompany}
                         </p>
                       </div>
@@ -116,7 +114,7 @@ export const HeroSection: React.FC<HeroSectionProps> = memo(
                     <span className="text-[#44464e] shrink-0">
                       {lang === 'en' ? 'Designation' : 'المسمى الوظيفي'}
                     </span>
-                    <span className="font-mono font-semibold text-[#0A1F44] text-right">
+                    <span className="font-mono font-semibold text-[#0A1F44] text-end">
                       {activeRole}
                     </span>
                   </div>
@@ -135,7 +133,7 @@ export const HeroSection: React.FC<HeroSectionProps> = memo(
                           ? 'In-Kingdom Total Value Add (IKTVA)'
                           : 'برنامج القيمة المضافة الإجمالية (اكتفاء)'
                       }
-                      code="IKTVA 74.2%"
+                      code={`IKTVA ${iktvaScore}`}
                       accentColor="#1E4FD8"
                       position="top"
                       align="end"
@@ -158,8 +156,8 @@ export const HeroSection: React.FC<HeroSectionProps> = memo(
                     <span className="text-[#44464e] shrink-0">
                       {lang === 'en' ? 'Mobilization Authority' : 'صلاحية التعبئة الفورية'}
                     </span>
-                    <span className="font-mono font-semibold text-[#A36605] tabular-nums">
-                      72-Hour Turnkey Dispatch
+                    <span className="font-mono font-semibold text-[#A36605] tabular-nums text-end">
+                      {lang === 'en' ? '72-Hour Turnkey Dispatch' : 'تعبئة فورية خلال 72 ساعة'}
                     </span>
                   </div>
                 </div>
@@ -170,18 +168,14 @@ export const HeroSection: React.FC<HeroSectionProps> = memo(
             <div className="col-span-12 lg:col-span-8 order-2 lg:order-1 space-y-5 sm:space-y-6">
               {/* Unboxed Regional & B2B Trust Markers (Zero-Pill Discipline) */}
               <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[11px] sm:text-xs font-mono text-[#00B8D4] tracking-wide">
-                <span className="font-semibold text-white">
-                  {lang === 'en'
-                    ? 'MOYNA MIAH · BUSINESS DEVELOPMENT MANAGER'
-                    : 'معين مياه · مدير تطوير الأعمال والمشاريع'}
+                <span className="font-semibold text-white uppercase">
+                  {activeName} · {activeRole}
                 </span>
                 <span aria-hidden="true" className="text-white/40">
                   ·
                 </span>
-                <span className="font-semibold text-[#F39C12]">
-                  {lang === 'en'
-                    ? 'MADA AL-GHUROUB GENERAL CONTRACTING COMPANY'
-                    : 'شركة مدى الغروب للمقاولات العامة'}
+                <span className="font-semibold text-[#F39C12] uppercase">
+                  {activeCompany}
                 </span>
                 <span aria-hidden="true" className="text-white/40">
                   ·

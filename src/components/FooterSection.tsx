@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { ShieldCheck, HardHat, Award, Lock } from 'lucide-react';
+import { ShieldCheck, HardHat, Award } from 'lucide-react';
 import { Language } from '../data/industrialData';
 import { CertificationTooltip } from './CertificationTooltip';
 
@@ -10,7 +10,7 @@ interface FooterSectionProps {
   activeRole: string;
   activeCompany: string;
   activeRegion: string;
-  onOpenAdminModal: () => void;
+  iktvaScore?: string;
 }
 
 export const FooterSection: React.FC<FooterSectionProps> = memo(
@@ -21,7 +21,7 @@ export const FooterSection: React.FC<FooterSectionProps> = memo(
     activeRole,
     activeCompany,
     activeRegion,
-    onOpenAdminModal,
+    iktvaScore = '74.2% Certified',
   }) => {
     return (
       <footer className="bg-[#0A1F44] text-white/75 border-t border-white/15 py-10 sm:py-12">
@@ -55,6 +55,12 @@ export const FooterSection: React.FC<FooterSectionProps> = memo(
               </a>
               <a href="#workforce-matrix" className="hover:text-white transition-colors">
                 {lang === 'en' ? 'Workforce Matrix' : 'مصفوفة الكوادر'}
+              </a>
+              <a href="#equipment-rental" className="hover:text-white transition-colors">
+                {lang === 'en' ? 'Equipment Rental' : 'تأجير المعدات'}
+              </a>
+              <a href="#workforce-analytics" className="hover:text-white transition-colors">
+                {lang === 'en' ? 'Analytics & Charts' : 'الإحصائيات والبيانات'}
               </a>
               <a href="#governance" className="hover:text-white transition-colors">
                 {lang === 'en' ? 'Governance' : 'الحوكمة والسلامة'}
@@ -130,33 +136,25 @@ export const FooterSection: React.FC<FooterSectionProps> = memo(
                     ? 'In-Kingdom Total Value Add (IKTVA)'
                     : 'برنامج القيمة المضافة الإجمالية في المملكة (اكتفاء)'
                 }
-                code="IKTVA 74.2%"
+                code={`IKTVA ${iktvaScore}`}
                 accentColor="#1E4FD8"
                 position="top"
                 align="end"
                 definition={
                   lang === 'en'
-                    ? 'Saudi Aramco localization metric verifying 74.2% domestic value creation through local material procurement, Saudi engineering employment, and in-Kingdom fabrication.'
-                    : 'معيار أرامكو السعودية لتوثيق نسبة المحتوى المحلي البالغة 74.2% عبر المشتريات الوطنية وتوظيف المهندسين السعوديين والتصنيع داخل المملكة.'
+                    ? 'Saudi Aramco localization metric verifying domestic value creation through local material procurement, Saudi engineering employment, and in-Kingdom fabrication.'
+                    : 'معيار أرامكو السعودية لتوثيق نسبة المحتوى المحلي عبر المشتريات الوطنية وتوظيف المهندسين السعوديين والتصنيع داخل المملكة.'
                 }
               >
                 <Award className="w-4 h-4 text-[#00B8D4] shrink-0" />
                 <span className="hover:text-white underline decoration-dotted underline-offset-4 decoration-white/35 transition-colors">
-                  {lang === 'en' ? 'IKTVA 74.2% Verified' : 'برنامج اكتفاء 74.2%'}
+                  {lang === 'en' ? `IKTVA ${iktvaScore}` : `برنامج اكتفاء ${iktvaScore}`}
                 </span>
               </CertificationTooltip>
             </div>
 
-            <div className="flex items-center gap-3 text-xs text-white/50 tabular-nums">
-              <span>© 2026 {activeName} · {activeCompany}.</span>
-              <button
-                type="button"
-                onClick={onOpenAdminModal}
-                className="inline-flex items-center gap-1 text-[#00B8D4] hover:text-white underline cursor-pointer"
-              >
-                <Lock className="w-3 h-3" />
-                <span>{lang === 'en' ? 'Admin Login' : 'دخول المسؤول'}</span>
-              </button>
+            <div className="flex flex-wrap items-center gap-3 text-xs text-white/50 tabular-nums">
+              <span>© {new Date().getFullYear()} {activeName} · {activeCompany}.</span>
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, memo } from 'react';
 import { Building2 } from 'lucide-react';
+import { safeImageSrc } from '../utils/safeImageSrc';
 
 interface ResilientImageProps {
   src: string;
@@ -8,6 +9,7 @@ interface ResilientImageProps {
   fallbackTitle?: string;
   loading?: 'lazy' | 'eager';
   fetchPriority?: 'high' | 'low' | 'auto';
+  decoding?: 'sync' | 'async' | 'auto';
 }
 
 export const ResilientImage: React.FC<ResilientImageProps> = memo(
@@ -18,14 +20,16 @@ export const ResilientImage: React.FC<ResilientImageProps> = memo(
     fallbackTitle,
     loading = 'lazy',
     fetchPriority = 'auto',
+    decoding,
   }) => {
     const [hasError, setHasError] = useState(false);
+    const sanitizedSrc = safeImageSrc(src);
 
     useEffect(() => {
       setHasError(false);
-    }, [src]);
+    }, [sanitizedSrc]);
 
-    if (hasError || !src) {
+    if (hasError || !sanitizedSrc) {
       return (
         <div
           className={`flex flex-col items-center justify-center bg-[#0A1F44] navy-blueprint-grid text-white p-6 text-center ${className}`}
@@ -42,10 +46,10 @@ export const ResilientImage: React.FC<ResilientImageProps> = memo(
 
     return (
       <img
-        src={src}
+        src={sanitizedSrc}
         alt={alt}
         loading={loading}
-        decoding="async"
+        decoding={decoding ?? (loading === 'eager' ? 'sync' : 'async')}
         fetchPriority={fetchPriority}
         referrerPolicy="no-referrer"
         onError={() => setHasError(true)}

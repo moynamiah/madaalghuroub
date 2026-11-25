@@ -54,8 +54,8 @@ service cloud.firestore {
         && data.roleAr is string && data.roleAr.size() >= 1 && data.roleAr.size() <= 200
         && data.companyEn is string && data.companyEn.size() >= 1 && data.companyEn.size() <= 200
         && data.companyAr is string && data.companyAr.size() >= 1 && data.companyAr.size() <= 240
-        && data.email is string && data.email.size() >= 3 && data.email.size() <= 160
-        && data.phone is string && data.phone.size() >= 5 && data.phone.size() <= 60
+        && data.email is string && data.email.size() >= 3 && data.email.size() <= 160 && data.email.matches('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$')
+        && data.phone is string && data.phone.size() >= 5 && data.phone.size() <= 60 && data.phone.matches('^[+0-9\\s\\-()]{8,60}$')
         && data.regionEn is string && data.regionEn.size() >= 1 && data.regionEn.size() <= 240
         && data.regionAr is string && data.regionAr.size() >= 1 && data.regionAr.size() <= 240
         && data.bioEn is string && data.bioEn.size() >= 1 && data.bioEn.size() <= 1200
@@ -110,12 +110,12 @@ service cloud.firestore {
           'selectedScopesSummary', 'attachedTradesSummary',
           'notes', 'status', 'createdAt'
         ])
-        && data.referenceId is string && data.referenceId.size() >= 5 && data.referenceId.size() <= 40
+        && data.referenceId is string && data.referenceId.size() >= 5 && data.referenceId.size() <= 40 && data.referenceId.matches('^RFQ-MM-20[0-9]{2}-[0-9]{6}$')
         && data.timestampDisplay is string && data.timestampDisplay.size() >= 5 && data.timestampDisplay.size() <= 40
         && data.organization is string && data.organization.size() >= 1 && data.organization.size() <= 180
         && data.contactName is string && data.contactName.size() >= 1 && data.contactName.size() <= 140
-        && data.email is string && data.email.size() >= 3 && data.email.size() <= 160
-        && data.phone is string && data.phone.size() >= 5 && data.phone.size() <= 60
+        && data.email is string && data.email.size() >= 3 && data.email.size() <= 160 && data.email.matches('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$')
+        && data.phone is string && data.phone.size() >= 8 && data.phone.size() <= 60 && data.phone.matches('^[+0-9\\s\\-()]{8,60}$')
         && data.region is string && data.region.size() >= 1 && data.region.size() <= 140
         && data.contractPackageType is string && data.contractPackageType.size() >= 1 && data.contractPackageType.size() <= 120
         && data.estimatedBudgetSAR is string && data.estimatedBudgetSAR.size() >= 1 && data.estimatedBudgetSAR.size() <= 80
@@ -177,9 +177,10 @@ service cloud.firestore {
 
     // Client Tender & Manpower RFQ Inquiries Collection
     match /tender_inquiries/{inquiryId} {
-      // Public B2B clients can submit a new inquiry with strict schema & timestamp enforcement
+      // Public B2B clients can submit a new inquiry with strict schema, ID binding & timestamp enforcement
       allow create: if isValidId(inquiryId)
         && isValidTenderInquiry(incoming())
+        && incoming().referenceId == inquiryId
         && incoming().status == 'new'
         && incoming().createdAt == request.time;
 

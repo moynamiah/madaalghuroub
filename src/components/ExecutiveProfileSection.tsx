@@ -24,6 +24,9 @@ export const ExecutiveProfileSection: React.FC<ExecutiveProfileSectionProps> = m
                 <img
                   src={activeLogoSrc}
                   alt="MADA AL-GHUROUB Company Logo"
+                  loading="eager"
+                  decoding="sync"
+                  fetchPriority="high"
                   className="w-full h-full object-contain"
                 />
               </div>

@@ -5,27 +5,19 @@ import {
   Download,
   RotateCcw,
   AlertCircle,
+  Clock,
   Mail,
   Phone,
 } from 'lucide-react';
 import { Language } from '../data/industrialData';
+import {
+  RFQ_FIELD_LIMITS,
+  type SubmittedTenderReceipt,
+  type PendingTenderSubmission,
+} from '../utils/rfqSubmission';
 import { ResilientImage } from './ResilientImage';
 
-export interface SubmittedTenderReceipt {
-  referenceId: string;
-  timestamp: string;
-  organization: string;
-  contactName: string;
-  email: string;
-  phone: string;
-  region: string;
-  contractPackageType: string;
-  estimatedBudgetSAR: string;
-  mobilizationTimeline: string;
-  selectedScopes: string[];
-  attachedTrades: { code: string; title: string; headcount: number; dailyRateSAR: number }[];
-  notes: string;
-}
+export type { SubmittedTenderReceipt, PendingTenderSubmission };
 
 export const SCOPE_OPTIONS = [
   {
@@ -43,6 +35,10 @@ export const SCOPE_OPTIONS = [
   {
     en: 'Aramco WPR Permit Receivers, NEBOSH HSE Officers & Camp Logistics',
     ar: 'مستلمو تصاريح العمل WPR وضباط السلامة NEBOSH وإدارة السكن',
+  },
+  {
+    en: 'Industrial Support & Equipment Operations (Crane & Heavy Equipment Operators)',
+    ar: 'عمليات الدعم الصناعي وتأجير المعدات الثقيلة ومشغلي الرافعات',
   },
 ] as const;
 
@@ -63,8 +59,11 @@ interface ProcurementRfqSectionProps {
   estimatedBudgetSAR: string;
   selectedScopes: string[];
   notes: string;
+  honeypotWebsite?: string;
   formError: string | null;
+  isSubmitting?: boolean;
   tenderReceipt: SubmittedTenderReceipt | null;
+  tenderPending?: PendingTenderSubmission | null;
   onSetOrganization: (val: string) => void;
   onSetContactName: (val: string) => void;
   onSetEmail: (val: string) => void;
@@ -73,10 +72,11 @@ interface ProcurementRfqSectionProps {
   onSetEstimatedBudgetSAR: (val: string) => void;
   onToggleScopeItem: (scopeLabel: string) => void;
   onSetNotes: (val: string) => void;
+  onSetHoneypotWebsite?: (val: string) => void;
   onSubmitTender: (e: React.FormEvent) => void;
   onDownloadReceipt: () => void;
   onResetTenderReceipt: () => void;
-  onTriggerPortraitUpload: () => void;
+  onResetTenderPending?: () => void;
 }
 
 export const ProcurementRfqSection: React.FC<ProcurementRfqSectionProps> = memo(
@@ -97,8 +97,11 @@ export const ProcurementRfqSection: React.FC<ProcurementRfqSectionProps> = memo(
     estimatedBudgetSAR,
     selectedScopes,
     notes,
+    honeypotWebsite = '',
     formError,
+    isSubmitting = false,
     tenderReceipt,
+    tenderPending = null,
     onSetOrganization,
     onSetContactName,
     onSetEmail,
@@ -107,10 +110,11 @@ export const ProcurementRfqSection: React.FC<ProcurementRfqSectionProps> = memo(
     onSetEstimatedBudgetSAR,
     onToggleScopeItem,
     onSetNotes,
+    onSetHoneypotWebsite,
     onSubmitTender,
     onDownloadReceipt,
     onResetTenderReceipt,
-    onTriggerPortraitUpload,
+    onResetTenderPending,
   }) => {
     return (
       <section
@@ -123,8 +127,8 @@ export const ProcurementRfqSection: React.FC<ProcurementRfqSectionProps> = memo(
             <div>
               <p className="text-xs font-mono font-semibold text-[#1E4FD8] mb-2">
                 {lang === 'en'
-                  ? '05. Direct Manpower Requisition & Contracting Desk'
-                  : '05. مكتب طلب القوى العاملة والتعاقد المباشر'}
+                  ? '06. Direct Manpower Requisition & Contracting Desk'
+                  : '06. مكتب طلب القوى العاملة والتعاقد المباشر'}
               </p>
               <h2 className="font-display text-[24px] leading-[32px] sm:text-[38px] sm:leading-[46px] font-bold tracking-[-0.015em] text-[#0A1F44]">
                 {lang === 'en'
@@ -141,10 +145,7 @@ export const ProcurementRfqSection: React.FC<ProcurementRfqSectionProps> = memo(
             <div className="bg-white rounded-[8px] border border-[#8A94A6]/25 p-5 sm:p-6 space-y-4">
               <div className="flex items-center justify-between gap-3.5 pb-4 border-b border-[#8A94A6]/20">
                 <div className="flex items-center gap-3.5 min-w-0">
-                  <div
-                    onDoubleClick={onTriggerPortraitUpload}
-                    className="w-14 h-18 rounded-[4px] overflow-hidden border border-[#0A1F44] shrink-0 bg-white select-none"
-                  >
+                  <div className="w-14 h-18 rounded-[4px] overflow-hidden border border-[#0A1F44] shrink-0 bg-white select-none">
                     <ResilientImage
                       src={activePortraitSrc}
                       alt="Moyna Miah"
@@ -241,10 +242,10 @@ export const ProcurementRfqSection: React.FC<ProcurementRfqSectionProps> = memo(
                       <FileCheck2 className="w-5 h-5" />
                     </div>
                     <div>
-                      <div className="text-xs font-mono font-semibold text-[#007E94]">
+                      <div className="text-xs font-mono font-semibold text-[#007E94] uppercase">
                         {lang === 'en'
-                          ? 'LOGGED WITH MOYNA MIAH — BUSINESS DEVELOPMENT MANAGER'
-                          : 'تم تسجيل الطلب لدى مكتب مدير تطوير الأعمال والمشاريع — معين مياه'}
+                          ? `LOGGED WITH ${activeName} — ${activeRole}`
+                          : `تم تسجيل الطلب لدى مكتب ${activeRole} — ${activeName}`}
                       </div>
                       <h3 className="font-display text-lg sm:text-xl font-bold text-[#0A1F44] tabular-nums">
                         {tenderReceipt.referenceId}
@@ -356,25 +357,126 @@ export const ProcurementRfqSection: React.FC<ProcurementRfqSectionProps> = memo(
                   </button>
                 </div>
               </div>
+            ) : tenderPending ? (
+              <div
+                role="status"
+                aria-live="polite"
+                className="bg-white rounded-[8px] border border-[#F39C12] border-t-4 border-t-[#F39C12] p-5 sm:p-8 space-y-6 shadow-[0_8px_24px_-4px_rgba(10,31,68,0.08)]"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 border-b border-[#8A94A6]/20 pb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-[4px] bg-[#0A1F44] text-[#F39C12] flex items-center justify-center shrink-0">
+                      <Clock className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-mono font-semibold text-[#b87100] uppercase">
+                        {lang === 'en'
+                          ? 'PENDING SERVER CONFIRMATION — NOT YET VERIFIED'
+                          : 'بانتظار تأكيد الخادم — لم يتم التحقق من الاستلام بعد'}
+                      </div>
+                      <h3 className="font-display text-lg sm:text-xl font-bold text-[#0A1F44] tabular-nums">
+                        {tenderPending.referenceId}
+                      </h3>
+                    </div>
+                  </div>
+                  <span className="text-xs font-mono text-[#8A94A6] tabular-nums">
+                    {tenderPending.timestamp}
+                  </span>
+                </div>
+
+                <div className="p-4 bg-[#fff8eb] border-s-4 border-[#F39C12] rounded-e-[4px] text-xs sm:text-sm text-[#0A1F44] leading-relaxed">
+                  {tenderPending.message}
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-white border border-[#8A94A6]/25 rounded-[4px] text-xs">
+                  <div>
+                    <span className="text-[#8A94A6] block">
+                      {lang === 'en' ? 'Contracting Entity:' : 'الجهة المتعاقدة:'}
+                    </span>
+                    <span className="font-display font-bold text-[#0A1F44] text-sm">
+                      {tenderPending.organization}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-[#8A94A6] block">
+                      {lang === 'en' ? 'Authorized Officer:' : 'المسؤول المفوض:'}
+                    </span>
+                    <span className="font-semibold text-[#0A1F44] text-sm break-all">
+                      {tenderPending.contactName} ({tenderPending.email})
+                    </span>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-[#8A94A6]/20 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    <a
+                      href={`tel:${activePhone.replace(/\s+/g, '')}`}
+                      className="min-h-[44px] inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-mono font-semibold text-white bg-[#0A1F44] hover:bg-[#1E4FD8] rounded-[4px] transition-colors"
+                    >
+                      <Phone className="w-3.5 h-3.5 shrink-0" />
+                      <span>{activePhone}</span>
+                    </a>
+                    <a
+                      href={`mailto:${activeEmail}?subject=${encodeURIComponent(`Pending Tender Inquiry ${tenderPending.referenceId}`)}`}
+                      className="min-h-[44px] inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-mono font-semibold text-[#0A1F44] border border-[#0A1F44] hover:bg-[#eff3ff] rounded-[4px] transition-colors"
+                    >
+                      <Mail className="w-3.5 h-3.5 shrink-0" />
+                      <span>{activeEmail}</span>
+                    </a>
+                  </div>
+
+                  {onResetTenderPending && (
+                    <button
+                      type="button"
+                      onClick={onResetTenderPending}
+                      className="min-h-[44px] inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-display font-semibold text-[#0A1F44] border border-[#8A94A6]/50 hover:border-[#0A1F44] rounded-[4px] transition-colors cursor-pointer"
+                    >
+                      <RotateCcw className="w-3.5 h-3.5 shrink-0" />
+                      <span>
+                        {lang === 'en' ? 'Return to Inquiry Form' : 'العودة إلى نموذج الطلب'}
+                      </span>
+                    </button>
+                  )}
+                </div>
+              </div>
             ) : (
               <form
                 onSubmit={onSubmitTender}
                 noValidate
-                className="bg-white rounded-[8px] border border-[#8A94A6]/30 border-t-[3px] border-t-[#1E4FD8] p-5 sm:p-8 space-y-5 sm:space-y-6"
+                className="relative bg-white rounded-[8px] border border-[#8A94A6]/30 border-t-[3px] border-t-[#1E4FD8] p-5 sm:p-8 space-y-5 sm:space-y-6"
               >
+                {/* Accessible offscreen anti-bot honeypot field (skipped by keyboard & screen readers) */}
+                <div
+                  aria-hidden="true"
+                  className="absolute -left-[9999px] top-auto w-px h-px overflow-hidden opacity-0 pointer-events-none"
+                >
+                  <label htmlFor="rfq-company-website">Company Website</label>
+                  <input
+                    id="rfq-company-website"
+                    name="company_website"
+                    type="text"
+                    value={honeypotWebsite}
+                    onChange={(e) => onSetHoneypotWebsite?.(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
                 <div className="border-b border-[#8A94A6]/20 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                   <h3 className="font-display text-base sm:text-lg font-bold text-[#0A1F44]">
                     {lang === 'en'
                       ? 'Direct Project Inquiry & Tender Requisition Form'
                       : 'نموذج التواصل المباشر وتقديم المناقصات الهندسية'}
                   </h3>
-                  <span className="text-xs font-mono text-[#8A94A6]">ATTN: MOYNA MIAH</span>
+                  <span className="text-xs font-mono text-[#8A94A6] uppercase">
+                    {lang === 'en' ? `ATTN: ${activeName}` : `عناية: ${activeName}`}
+                  </span>
                 </div>
 
                 {formError && (
                   <div
                     role="alert"
-                    className="p-3.5 bg-[#ffdad6]/50 border-l-4 border-[#ba1a1a] rounded-r-[4px] flex items-center gap-2.5 text-xs font-medium text-[#93000a]"
+                    className="p-3.5 bg-[#ffdad6]/50 border-s-4 border-[#ba1a1a] rounded-e-[4px] flex items-center gap-2.5 text-xs font-medium text-[#93000a]"
                   >
                     <AlertCircle className="w-4 h-4 shrink-0 text-[#ba1a1a]" />
                     <span>{formError}</span>
@@ -395,6 +497,7 @@ export const ProcurementRfqSection: React.FC<ProcurementRfqSectionProps> = memo(
                       id="rfq-org"
                       type="text"
                       required
+                      maxLength={RFQ_FIELD_LIMITS.organization}
                       value={organization}
                       onChange={(e) => onSetOrganization(e.target.value)}
                       placeholder={
@@ -419,6 +522,7 @@ export const ProcurementRfqSection: React.FC<ProcurementRfqSectionProps> = memo(
                       id="rfq-contact"
                       type="text"
                       required
+                      maxLength={RFQ_FIELD_LIMITS.contactName}
                       value={contactName}
                       onChange={(e) => onSetContactName(e.target.value)}
                       placeholder={
@@ -439,6 +543,7 @@ export const ProcurementRfqSection: React.FC<ProcurementRfqSectionProps> = memo(
                       id="rfq-email"
                       type="email"
                       required
+                      maxLength={RFQ_FIELD_LIMITS.email}
                       value={email}
                       onChange={(e) => onSetEmail(e.target.value)}
                       placeholder="procurement@organization.sa"
@@ -457,6 +562,8 @@ export const ProcurementRfqSection: React.FC<ProcurementRfqSectionProps> = memo(
                       id="rfq-phone"
                       type="tel"
                       required
+                      maxLength={RFQ_FIELD_LIMITS.phone}
+                      pattern="[+0-9\s\-()]{8,60}"
                       value={phone}
                       onChange={(e) => onSetPhone(e.target.value)}
                       placeholder="+966 50 000 0000"
@@ -580,6 +687,7 @@ export const ProcurementRfqSection: React.FC<ProcurementRfqSectionProps> = memo(
                   <textarea
                     id="rfq-notes"
                     rows={3}
+                    maxLength={RFQ_FIELD_LIMITS.notes}
                     value={notes}
                     onChange={(e) => onSetNotes(e.target.value)}
                     placeholder={
@@ -599,9 +707,14 @@ export const ProcurementRfqSection: React.FC<ProcurementRfqSectionProps> = memo(
                   </span>
                   <button
                     type="submit"
-                    className="min-h-[48px] w-full sm:w-auto px-6 py-3.5 text-xs sm:text-sm font-display font-bold text-white bg-[#F39C12] hover:bg-[#d9880b] rounded-[4px] transition-colors whitespace-nowrap cursor-pointer"
+                    disabled={isSubmitting}
+                    className="min-h-[48px] w-full sm:w-auto px-6 py-3.5 text-xs sm:text-sm font-display font-bold text-white bg-[#F39C12] hover:bg-[#d9880b] disabled:opacity-60 disabled:cursor-not-allowed rounded-[4px] transition-colors whitespace-nowrap cursor-pointer"
                   >
-                    {lang === 'en'
+                    {isSubmitting
+                      ? lang === 'en'
+                        ? 'Transmitting Tender RFQ...'
+                        : 'جاري إرسال طلب العرض...'
+                      : lang === 'en'
                       ? 'Transmit Official Tender RFQ'
                       : 'إرسال طلب العرض الفني والتجاري'}
                   </button>
